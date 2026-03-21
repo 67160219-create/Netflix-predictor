@@ -6,7 +6,7 @@ import joblib
 # ------------------------------------------------
 # 1. ตั้งค่าหน้าเว็บให้เต็มจอและซ่อนเมนูที่ไม่จำเป็น
 # ------------------------------------------------
-st.set_page_config(page_title="Netflix Predictor", page_icon="🍿", layout="centered")
+st.set_page_config(page_title="Netflix Predictor", page_icon="", layout="centered")
 
 # **ลิสต์รูปภาพพื้นหลัง Demo สำหรับหนังดังๆ**
 DEMO_BACKGROUNDS = {
@@ -65,10 +65,10 @@ st.markdown("""
 # ------------------------------------------------
 # 4. ส่วนตัวเลือกทางซ้าย (Sidebar)
 # ------------------------------------------------
-st.sidebar.header("⚙️ ตั้งค่าและข้อมูลภาพยนตร์")
+st.sidebar.header(" ตั้งค่าและข้อมูลภาพยนตร์")
 
 selected_model_name = st.sidebar.selectbox(
-    "🤖 1. เลือกโมเดลทำนาย", 
+    " 1. เลือกโมเดลทำนาย", 
     ['Gradient Boosting', 'Random Forest', 'Support Vector Machine (SVM)', 'Logistic Regression']
 )
 
@@ -92,7 +92,7 @@ else:
     selected_bg_url = DEFAULT_BACKGROUND
 
 # ------------------------------------------------
-# 🎨 Custom CSS (ใส่กล่องดำตรงกลางกลับมาให้ด้วย)
+#  Custom CSS (ใส่กล่องดำตรงกลางกลับมาให้ด้วย)
 # ------------------------------------------------
 st.markdown(f"""
     <style>
@@ -155,13 +155,13 @@ st.markdown(f"""
 
 # แถบเลื่อนปรับค่า
 st.sidebar.markdown("---")
-st.sidebar.subheader("📊 3. ปรับแต่งสถิติ")
-year = st.sidebar.slider("📅 ปีที่ฉาย", 1900, 2030, def_year)
+st.sidebar.subheader(" 3. ปรับแต่งสถิติ")
+year = st.sidebar.slider(" ปีที่ฉาย", 1900, 2030, def_year)
 age_options = ['Unknown', 'all', '7+', '13+', '16+', '18+']
 age_index = age_options.index(def_age) if def_age in age_options else 0
-age = st.sidebar.selectbox("👪 เรทอายุ", age_options, index=age_index)
-imdb = st.sidebar.slider("⭐ คะแนน IMDb", 0.0, 10.0, def_imdb, step=0.1)
-rotten_tomatoes = st.sidebar.slider("🍅 คะแนน Rotten Tomatoes", 0.0, 100.0, def_rt, step=1.0)
+age = st.sidebar.selectbox(" เรทอายุ", age_options, index=age_index)
+imdb = st.sidebar.slider(" คะแนน IMDb", 0.0, 10.0, def_imdb, step=0.1)
+rotten_tomatoes = st.sidebar.slider(" คะแนน Rotten Tomatoes", 0.0, 100.0, def_rt, step=1.0)
 
 # ------------------------------------------------
 # 5. ปุ่มทำนายและการแสดงผลลัพธ์ (แบบมีเปอร์เซ็นต์ + Tailwind UI)
@@ -182,7 +182,7 @@ if st.button("PREDICT AVAILABILITY"):
             st.markdown(f"""
             <div class="bg-gray-900 bg-opacity-80 border-l-4 border-green-500 rounded-lg shadow-2xl p-6 mt-4 backdrop-filter backdrop-blur-sm transform transition duration-500 hover:scale-105">
                 <div class="flex items-center">
-                    <div class="text-5xl mr-6">🍿</div>
+                    <div class="text-5xl mr-6"></div>
                     <div>
                         <h2 class="text-3xl font-extrabold text-white mb-1 tracking-wide">YES</h2>
                         <p class="text-gray-300 text-lg">ภาพยนตร์เรื่องนี้น่าจะมีฉายบน <span class="text-red-500 font-bold">NETFLIX</span></p>
@@ -200,7 +200,7 @@ if st.button("PREDICT AVAILABILITY"):
             st.markdown(f"""
             <div class="bg-gray-900 bg-opacity-80 border-l-4 border-red-600 rounded-lg shadow-2xl p-6 mt-4 backdrop-filter backdrop-blur-sm transform transition duration-500 hover:scale-105">
                 <div class="flex items-center">
-                    <div class="text-5xl mr-6">🎬</div>
+                    <div class="text-5xl mr-6"></div>
                     <div>
                         <h2 class="text-3xl font-extrabold text-white mb-1 tracking-wide">NO</h2>
                         <p class="text-gray-300 text-lg">ภาพยนตร์เรื่องนี้น่าจะ <span class="text-red-500 font-bold">ไม่มี</span> ฉายบน NETFLIX</p>
