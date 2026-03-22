@@ -76,7 +76,7 @@ st.sidebar.markdown("---")
 st.sidebar.subheader(" 2. ข้อมูลภาพยนตร์/ซีรีส์")
 
 movie_titles = ["-- กรอกข้อมูลเอง (Manual) --"] + df_movies['Title'].dropna().tolist()
-selected_title = st.sidebar.selectbox("🔍 ค้นหาชื่อเรื่อง", movie_titles)
+selected_title = st.sidebar.selectbox(" ค้นหาชื่อเรื่อง", movie_titles)
 
 if selected_title != "-- กรอกข้อมูลเอง (Manual) --":
     movie_info = df_movies[df_movies['Title'] == selected_title].iloc[0]
