@@ -6,7 +6,7 @@ import joblib
 # ------------------------------------------------
 # 1. ตั้งค่าหน้าเว็บให้เต็มจอ
 # ------------------------------------------------
-st.set_page_config(page_title="Netflix Predictor", page_icon="", layout="centered")
+st.set_page_config(page_title=" Netflix Predictor", page_icon="", layout="centered")
 
 # **ลิสต์รูปภาพพื้นหลัง Demo สำหรับหนังดังๆ**
 DEMO_BACKGROUNDS = {
