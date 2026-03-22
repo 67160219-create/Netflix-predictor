@@ -6,7 +6,7 @@ import joblib
 # ------------------------------------------------
 # 1. ตั้งค่าหน้าเว็บให้เต็มจอ
 # ------------------------------------------------
-st.set_page_config(page_title="Netflix Predictor", page_icon="🎬", layout="centered")
+st.set_page_config(page_title="Netflix Predictor", page_icon="", layout="centered")
 
 # **ลิสต์รูปภาพพื้นหลัง Demo สำหรับหนังดังๆ**
 DEMO_BACKGROUNDS = {
@@ -57,7 +57,7 @@ st.markdown("""
             NETFLIX <span class="text-white">PREDICTOR</span>
         </h1>
         <p class="mt-2 text-lg font-light tracking-wide" style="font-family: 'Inter', sans-serif; color: #B3B3B3;">
-            ระบบทำนายโอกาสฉายภาพยนตร์บนแพลตฟอร์ม
+            ระบบทำนายโอกาสฉายภาพยนตร์บน Netflix
         </p>
     </div>
 """, unsafe_allow_html=True)
