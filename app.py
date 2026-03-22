@@ -57,7 +57,7 @@ st.markdown("""
             <span style="color: #ff69b4;">NETFLIX</span> PREDICTOR 🎀
         </h1>
         <p class="mt-4 text-xl font-medium tracking-wide" style="font-family: 'Inter', sans-serif; color: #ff69b4;">
-            ระบบทำนายโอกาสฉายภาพยนตร์บน Netflix ✨
+            ระบบทำนายโอกาสฉายภาพยนตร์บน Netflix 
         </p>
     </div>
 """, unsafe_allow_html=True)
@@ -65,7 +65,7 @@ st.markdown("""
 # ------------------------------------------------
 # 4. ส่วนตัวเลือกทางซ้าย (Sidebar)
 # ------------------------------------------------
-st.sidebar.header("🌸 ตั้งค่าและข้อมูลภาพยนตร์")
+st.sidebar.header("ตั้งค่าและข้อมูลภาพยนตร์")
 
 selected_model_name = st.sidebar.selectbox(
     " 1. เลือกโมเดลทำนาย", 
