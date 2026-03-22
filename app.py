@@ -46,18 +46,17 @@ def load_data():
 df_movies = load_data()
 
 # ------------------------------------------------
-# 3. ส่วนหัวของเว็บ (Main Area) - สไตล์ Netflix
+# 3. ส่วนหัวของเว็บ (Main Area) - บังคับกึ่งกลาง
 # ------------------------------------------------
 st.markdown("""
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <div class="text-center mb-6 mt-2">
-        <h1 class="text-6xl font-normal tracking-widest uppercase" style="font-family: 'Bebas Neue', cursive; color: #E50914; text-shadow: 2px 2px 10px rgba(229, 9, 20, 0.4);">
-            NETFLIX <span class="text-white">PREDICTOR</span>
+    <div style="text-align: center; padding-top: 1rem; padding-bottom: 2rem;">
+        <h1 style="font-family: 'Bebas Neue', sans-serif; color: #E50914; font-size: 4.5rem; letter-spacing: 4px; text-shadow: 2px 2px 10px rgba(229, 9, 20, 0.4); margin: 0; line-height: 1;">
+            NETFLIX <span style="color: #FFFFFF;">PREDICTOR</span>
         </h1>
-        <p class="mt-2 text-lg font-light tracking-wide" style="font-family: 'Inter', sans-serif; color: #B3B3B3;">
-            ระบบทำนายโอกาสฉายภาพยนตร์บนแพลตฟอร์ม
+        <p style="font-family: 'Inter', sans-serif; color: #B3B3B3; font-size: 1.2rem; font-weight: 300; margin-top: 10px; letter-spacing: 0.5px;">
+            ระบบทำนายโอกาสฉายภาพยนตร์บน Netflix
         </p>
     </div>
 """, unsafe_allow_html=True)
@@ -111,7 +110,7 @@ st.markdown(f"""
 
         /* พื้นหลังหลัก ไล่สีดำทึบแบบ Netflix ทับรูปภาพ */
         .stApp {{
-            background: linear-gradient(to bottom, rgba(20, 20, 20, 0.6) 0%, rgba(20, 20, 20, 0.95) 70%, rgba(20, 20, 20, 1) 100%), url("{selected_bg_url}");
+            background: linear-gradient(to bottom, rgba(20, 20, 20, 0.7) 0%, rgba(20, 20, 20, 0.95) 60%, rgba(20, 20, 20, 1) 100%), url("{selected_bg_url}");
             background-size: cover;
             background-position: center top;
             background-attachment: fixed;
@@ -124,38 +123,38 @@ st.markdown(f"""
             border-right: 1px solid #333;
         }}
 
-        /* กล่องเนื้อหาตรงกลาง สไตล์หน้า Login Netflix (ดำโปร่งแสงนิดๆ) */
+        /* กล่องเนื้อหาตรงกลาง */
         .block-container {{
-            background-color: rgba(0, 0, 0, 0.75) !important;
+            background-color: rgba(0, 0, 0, 0.65) !important;
             border-radius: 8px;
-            padding: 3rem 4rem !important;
+            padding: 2.5rem 3rem !important;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             margin-top: 2rem;
             margin-bottom: 2rem;
             max-width: 750px !important;
         }}
 
-        /* ปุ่มกด สีแดง Netflix ยอดฮิต */
+        /* บังคับปุ่มกดให้เต็มกล่องและอยู่ตรงกลาง */
         div.stButton > button:first-child {{
             background-color: #E50914 !important;
             color: #FFFFFF !important;
-            width: 100%;
-            border-radius: 4px !important; /* เหลี่ยมมนนิดๆ แบบ Netflix */
-            padding: 0.75rem 0;
+            width: 100% !important; 
+            border-radius: 4px !important; 
+            padding: 0.8rem 0;
             font-size: 1.25rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             border: none;
             transition: all 0.2s ease;
-            margin-top: 15px;
+            margin-top: 10px;
         }}
         
         div.stButton > button:first-child:hover {{
-            background-color: #C11119 !important; /* แดงเข้มขึ้นเวลาเอาเมาส์ชี้ */
+            background-color: #C11119 !important; 
         }}
         
-        /* บังคับสีตัวหนังสือทั้งหมดให้เป็นสีเทาอ่อน/ขาว เพื่อให้อ่านง่ายบนจอดำ */
+        /* สีข้อความระบบให้เป็นสีขาว/เทา */
         h2, h3, label, .st-emotion-cache-10trblm {{
             color: #FFFFFF !important;
         }}
@@ -179,8 +178,9 @@ rotten_tomatoes = st.sidebar.slider("🍅 คะแนน Rotten Tomatoes", 0.0,
 # 5. ปุ่มทำนายและการแสดงผลลัพธ์
 # ------------------------------------------------
 st.markdown("<br>", unsafe_allow_html=True)
-model = load_model(selected_model_name)
-st.markdown(f"<p class='text-xs tracking-widest text-center uppercase' style='color: #808080 !important;'>Model: <span class='font-bold text-white'>{selected_model_name}</span></p>", unsafe_allow_html=True)
+
+# ชื่อโมเดลตรงกลางหน้าจอ
+st.markdown(f"<p style='text-align: center; color: #808080; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;'>Model: <span style='font-weight: bold; color: #FFFFFF;'>{selected_model_name}</span></p>", unsafe_allow_html=True)
 
 if st.button("PREDICT"):
     
@@ -196,28 +196,29 @@ if st.button("PREDICT"):
                 <div style="display: flex; align-items: center;">
                     <div style="font-size: 40px; margin-right: 20px;">🍿</div>
                     <div>
-                        <h2 style="font-size: 24px; font-weight: bold; color: #FFFFFF; margin: 0; letter-spacing: 1px;">AVAILABLE ON NETFLIX</h2>
-                        <p style="color: #B3B3B3; font-size: 16px; margin-top: 5px;">ภาพยนตร์เรื่องนี้มีโอกาสสูงที่จะฉายบนแพลตฟอร์ม</p>
+                        <h2 style="font-size: 24px; font-weight: bold; color: #FFFFFF; margin: 0; letter-spacing: 1px;">YES! ✨</h2>
+                        <p style="color: #B3B3B3; font-size: 16px; margin-top: 5px;">ภาพยนตร์เรื่องนี้น่าจะมีฉายบน NETFLIX</p>
                         <div style="margin-top: 10px;">
                             <span style="background-color: rgba(229, 9, 20, 0.2); color: #E50914; font-size: 14px; padding: 4px 12px; border-radius: 4px; font-weight: bold;">
-                                MATCH: {probability:.0f}%
+                                ความน่าจะเป็น: {probability:.1f}%
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
+            st.balloons() # ฉลองด้วยลูกโป่งเหมือนเดิม
         else:
             st.markdown(f"""
             <div style="background-color: #181818; border-left: 4px solid #808080; padding: 20px; border-radius: 4px; margin-top: 20px;">
                 <div style="display: flex; align-items: center;">
-                    <div style="font-size: 40px; margin-right: 20px;">🚫</div>
+                    <div style="font-size: 40px; margin-right: 20px;">🎬</div>
                     <div>
-                        <h2 style="font-size: 24px; font-weight: bold; color: #FFFFFF; margin: 0; letter-spacing: 1px;">NOT AVAILABLE</h2>
-                        <p style="color: #B3B3B3; font-size: 16px; margin-top: 5px;">ภาพยนตร์เรื่องนี้ไม่น่าจะมีฉายบนแพลตฟอร์ม</p>
+                        <h2 style="font-size: 24px; font-weight: bold; color: #FFFFFF; margin: 0; letter-spacing: 1px;">NO 🥺</h2>
+                        <p style="color: #B3B3B3; font-size: 16px; margin-top: 5px;">ภาพยนตร์เรื่องนี้น่าจะไม่มีฉายบน NETFLIX</p>
                         <div style="margin-top: 10px;">
                             <span style="background-color: rgba(128, 128, 128, 0.2); color: #B3B3B3; font-size: 14px; padding: 4px 12px; border-radius: 4px; font-weight: bold;">
-                                PROBABILITY: {probability:.0f}%
+                                ความน่าจะเป็น (ที่จะมีฉาย): {probability:.1f}%
                             </span>
                         </div>
                     </div>
