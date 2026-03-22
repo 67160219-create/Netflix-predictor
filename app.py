@@ -179,6 +179,9 @@ rotten_tomatoes = st.sidebar.slider("🍅 คะแนน Rotten Tomatoes", 0.0,
 # ------------------------------------------------
 st.markdown("<br>", unsafe_allow_html=True)
 
+# ---> โหลดโมเดลตรงนี้ครับ <---
+model = load_model(selected_model_name)
+
 # ชื่อโมเดลตรงกลางหน้าจอ
 st.markdown(f"<p style='text-align: center; color: #808080; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;'>Model: <span style='font-weight: bold; color: #FFFFFF;'>{selected_model_name}</span></p>", unsafe_allow_html=True)
 
@@ -207,7 +210,7 @@ if st.button("PREDICT"):
                 </div>
             </div>
             """, unsafe_allow_html=True)
-            st.balloons() # ฉลองด้วยลูกโป่งเหมือนเดิม
+            st.balloons()
         else:
             st.markdown(f"""
             <div style="background-color: #181818; border-left: 4px solid #808080; padding: 20px; border-radius: 4px; margin-top: 20px;">
