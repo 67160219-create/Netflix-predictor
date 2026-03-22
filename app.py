@@ -4,9 +4,9 @@ import numpy as np
 import joblib
 
 # ------------------------------------------------
-# 1. ตั้งค่าหน้าเว็บให้เต็มจอและไอคอนน่ารักๆ
+# 1. ตั้งค่าหน้าเว็บให้เต็มจอ
 # ------------------------------------------------
-st.set_page_config(page_title="Netflix Predictor", page_icon="🎀", layout="centered")
+st.set_page_config(page_title="Netflix Predictor", page_icon="🎬", layout="centered")
 
 # **ลิสต์รูปภาพพื้นหลัง Demo สำหรับหนังดังๆ**
 DEMO_BACKGROUNDS = {
@@ -17,7 +17,7 @@ DEMO_BACKGROUNDS = {
     "House of Cards": "https://r4.wallpaperflare.com/wallpaper/709/962/834/house-of-cards-wallpaper-ef800a40d58841452425667a4e604f76.jpg",
 }
 
-# ภาพพื้นหลังมาตรฐาน (โรงหนังเบลอๆ)
+# ภาพพื้นหลังมาตรฐาน (โรงหนังเบลอๆ โทนดาร์ก)
 DEFAULT_BACKGROUND = "https://w0.peakpx.com/wallpaper/276/75/wallpaper-cinematic-movie-theater-blurred-background.jpg"
 
 # ------------------------------------------------
@@ -46,18 +46,18 @@ def load_data():
 df_movies = load_data()
 
 # ------------------------------------------------
-# 3. ส่วนหัวของเว็บ (Main Area) - ธีมชมพูน่ารัก
+# 3. ส่วนหัวของเว็บ (Main Area) - สไตล์ Netflix
 # ------------------------------------------------
 st.markdown("""
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <div class="text-center mb-8 mt-4">
-        <h1 class="text-5xl font-extrabold tracking-wider uppercase" style="font-family: 'Inter', sans-serif; color: #ff1493; text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);">
-            <span style="color: #ff69b4;">NETFLIX</span> PREDICTOR 🎀
+    <div class="text-center mb-6 mt-2">
+        <h1 class="text-6xl font-normal tracking-widest uppercase" style="font-family: 'Bebas Neue', cursive; color: #E50914; text-shadow: 2px 2px 10px rgba(229, 9, 20, 0.4);">
+            NETFLIX <span class="text-white">PREDICTOR</span>
         </h1>
-        <p class="mt-4 text-xl font-medium tracking-wide" style="font-family: 'Inter', sans-serif; color: #ff69b4;">
-            ระบบทำนายโอกาสฉายภาพยนตร์บน Netflix ✨
+        <p class="mt-2 text-lg font-light tracking-wide" style="font-family: 'Inter', sans-serif; color: #B3B3B3;">
+            ระบบทำนายโอกาสฉายภาพยนตร์บนแพลตฟอร์ม
         </p>
     </div>
 """, unsafe_allow_html=True)
@@ -65,7 +65,7 @@ st.markdown("""
 # ------------------------------------------------
 # 4. ส่วนตัวเลือกทางซ้าย (Sidebar)
 # ------------------------------------------------
-st.sidebar.header("🌸 ตั้งค่าและข้อมูลภาพยนตร์")
+st.sidebar.header("⚙️ ตั้งค่าระบบ")
 
 selected_model_name = st.sidebar.selectbox(
     "🤖 1. เลือกโมเดลทำนาย", 
@@ -86,13 +86,13 @@ if selected_title != "-- กรอกข้อมูลเอง (Manual) --":
     def_rt = float(movie_info['Rotten Tomatoes'])
     
     selected_bg_url = DEMO_BACKGROUNDS.get(selected_title, DEFAULT_BACKGROUND)
-    st.sidebar.success(f"โหลดสถิติของเรื่อง {selected_title} สำเร็จ! 💖")
+    st.sidebar.success(f"โหลดข้อมูล: {selected_title}")
 else:
     def_year, def_age, def_imdb, def_rt = 2015, 'Unknown', 7.5, 80.0
     selected_bg_url = DEFAULT_BACKGROUND
 
 # ------------------------------------------------
-# 🎨 Custom CSS (บังคับธีมสีชมพูพาสเทล คืนจุดสามจุดให้แล้ว)
+# 🎨 Custom CSS (บังคับธีม Netflix ของแท้ 100%)
 # ------------------------------------------------
 st.markdown(f"""
     <style>
@@ -101,66 +101,66 @@ st.markdown(f"""
             font-family: 'Inter', sans-serif !important;
         }}
     
-        /* ซ่อนแค่ลายน้ำ Streamlit ด้านล่าง แต่ไม่ซ่อนเมนูจุดสามจุด */
+        /* ซ่อนลายน้ำ Streamlit แต่เก็บจุดสามจุดไว้ */
         footer {{visibility: hidden;}}
         
-        /* แถบด้านบนสุดให้โปร่งใส (แต่ยังกดจุดสามจุดได้) */
+        /* แถบด้านบนสุดให้โปร่งใส แต่ยังกดเมนูได้ */
         [data-testid="stHeader"] {{
             background-color: transparent !important;
         }}
 
-        /* พื้นหลังหลัก ไล่สีชมพูพาสเทลทับรูปโรงหนัง */
+        /* พื้นหลังหลัก ไล่สีดำทึบแบบ Netflix ทับรูปภาพ */
         .stApp {{
-            background: linear-gradient(to bottom, rgba(255, 240, 245, 0.85) 0%, rgba(255, 192, 203, 0.95) 100%), url("{selected_bg_url}");
+            background: linear-gradient(to bottom, rgba(20, 20, 20, 0.6) 0%, rgba(20, 20, 20, 0.95) 70%, rgba(20, 20, 20, 1) 100%), url("{selected_bg_url}");
             background-size: cover;
             background-position: center top;
             background-attachment: fixed;
-            transition: background-image 0.6s ease-in-out;
+            transition: background-image 0.5s ease-in-out;
         }}
 
-        /* แถบเมนูด้านซ้าย (Sidebar) สีชมพูอ่อนๆ */
+        /* แถบเมนูด้านซ้าย (Sidebar) สีดำสนิท */
         [data-testid="stSidebar"] {{
-            background-color: rgba(255, 228, 225, 0.95) !important;
-            border-right: 2px solid #ffb6c1;
+            background-color: #000000 !important;
+            border-right: 1px solid #333;
         }}
 
-        /* กล่องเนื้อหาตรงกลาง สีขาวขอบมนดูสะอาดตา */
+        /* กล่องเนื้อหาตรงกลาง สไตล์หน้า Login Netflix (ดำโปร่งแสงนิดๆ) */
         .block-container {{
-            background-color: rgba(255, 255, 255, 0.9) !important;
-            border-radius: 24px;
-            padding: 3rem !important;
-            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.15);
-            border: 2px solid #ffe4e1;
-            margin-top: 1rem;
+            background-color: rgba(0, 0, 0, 0.75) !important;
+            border-radius: 8px;
+            padding: 3rem 4rem !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
             margin-bottom: 2rem;
-            max-width: 800px !important;
+            max-width: 750px !important;
         }}
 
-        /* แต่งปุ่มกดให้เป็นสีชมพู HotPink สไตล์น่ารัก */
+        /* ปุ่มกด สีแดง Netflix ยอดฮิต */
         div.stButton > button:first-child {{
-            background-color: #ff69b4 !important;
-            color: white !important;
+            background-color: #E50914 !important;
+            color: #FFFFFF !important;
             width: 100%;
-            border-radius: 50px !important; 
-            padding: 0.8rem 0;
+            border-radius: 4px !important; /* เหลี่ยมมนนิดๆ แบบ Netflix */
+            padding: 0.75rem 0;
             font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: 1px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             border: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+            transition: all 0.2s ease;
             margin-top: 15px;
         }}
         
         div.stButton > button:first-child:hover {{
-            background-color: #ff1493 !important;
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.5);
+            background-color: #C11119 !important; /* แดงเข้มขึ้นเวลาเอาเมาส์ชี้ */
         }}
         
-        /* บังคับสีตัวหนังสือทั้งหมดให้เป็นสีเทาเข้ม จะได้อ่านง่ายสำหรับทุกคน */
-        h1, h2, h3, p, span, label, .st-emotion-cache-10trblm {{
-            color: #4a4a4a !important;
+        /* บังคับสีตัวหนังสือทั้งหมดให้เป็นสีเทาอ่อน/ขาว เพื่อให้อ่านง่ายบนจอดำ */
+        h2, h3, label, .st-emotion-cache-10trblm {{
+            color: #FFFFFF !important;
+        }}
+        p, span {{
+            color: #B3B3B3 !important;
         }}
     </style>
 """, unsafe_allow_html=True)
@@ -180,9 +180,9 @@ rotten_tomatoes = st.sidebar.slider("🍅 คะแนน Rotten Tomatoes", 0.0,
 # ------------------------------------------------
 st.markdown("<br>", unsafe_allow_html=True)
 model = load_model(selected_model_name)
-st.markdown(f"<p class='text-sm tracking-wide text-center' style='color: #ff69b4 !important;'>MODELS IN USE: <span class='font-bold'>{selected_model_name.upper()}</span></p>", unsafe_allow_html=True)
+st.markdown(f"<p class='text-xs tracking-widest text-center uppercase' style='color: #808080 !important;'>Model: <span class='font-bold text-white'>{selected_model_name}</span></p>", unsafe_allow_html=True)
 
-if st.button("PREDICT AVAILABILITY 🚀"):
+if st.button("PREDICT"):
     
     input_data = pd.DataFrame({'Year': [year], 'Age': [age], 'IMDb': [imdb], 'Rotten Tomatoes': [rotten_tomatoes]})
     
@@ -192,33 +192,32 @@ if st.button("PREDICT AVAILABILITY 🚀"):
         
         if prediction[0] == 1:
             st.markdown(f"""
-            <div class="bg-green-50 border-l-4 border-green-400 rounded-lg p-6 mt-4 shadow-lg">
-                <div class="flex items-center">
-                    <div class="text-5xl mr-6">🍿</div>
+            <div style="background-color: #181818; border-left: 4px solid #E50914; padding: 20px; border-radius: 4px; margin-top: 20px;">
+                <div style="display: flex; align-items: center;">
+                    <div style="font-size: 40px; margin-right: 20px;">🍿</div>
                     <div>
-                        <h2 class="text-3xl font-extrabold text-green-700 mb-1 tracking-wide">YES! ✨</h2>
-                        <p class="text-green-600 text-lg">ภาพยนตร์เรื่องนี้น่าจะมีฉายบน <span class="font-bold">NETFLIX</span></p>
-                        <div class="mt-4">
-                            <span class="inline-block bg-green-200 text-green-800 text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider">
-                                ความน่าจะเป็น: {probability:.1f}%
+                        <h2 style="font-size: 24px; font-weight: bold; color: #FFFFFF; margin: 0; letter-spacing: 1px;">AVAILABLE ON NETFLIX</h2>
+                        <p style="color: #B3B3B3; font-size: 16px; margin-top: 5px;">ภาพยนตร์เรื่องนี้มีโอกาสสูงที่จะฉายบนแพลตฟอร์ม</p>
+                        <div style="margin-top: 10px;">
+                            <span style="background-color: rgba(229, 9, 20, 0.2); color: #E50914; font-size: 14px; padding: 4px 12px; border-radius: 4px; font-weight: bold;">
+                                MATCH: {probability:.0f}%
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
-            st.balloons()
         else:
             st.markdown(f"""
-            <div class="bg-red-50 border-l-4 border-red-400 rounded-lg p-6 mt-4 shadow-lg">
-                <div class="flex items-center">
-                    <div class="text-5xl mr-6">🎬</div>
+            <div style="background-color: #181818; border-left: 4px solid #808080; padding: 20px; border-radius: 4px; margin-top: 20px;">
+                <div style="display: flex; align-items: center;">
+                    <div style="font-size: 40px; margin-right: 20px;">🚫</div>
                     <div>
-                        <h2 class="text-3xl font-extrabold text-red-700 mb-1 tracking-wide">NO 🥺</h2>
-                        <p class="text-red-600 text-lg">ภาพยนตร์เรื่องนี้น่าจะ <span class="font-bold">ไม่มี</span> ฉายบน NETFLIX</p>
-                        <div class="mt-4">
-                            <span class="inline-block bg-red-200 text-red-800 text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider">
-                                ความน่าจะเป็น (ที่จะมีฉาย): {probability:.1f}%
+                        <h2 style="font-size: 24px; font-weight: bold; color: #FFFFFF; margin: 0; letter-spacing: 1px;">NOT AVAILABLE</h2>
+                        <p style="color: #B3B3B3; font-size: 16px; margin-top: 5px;">ภาพยนตร์เรื่องนี้ไม่น่าจะมีฉายบนแพลตฟอร์ม</p>
+                        <div style="margin-top: 10px;">
+                            <span style="background-color: rgba(128, 128, 128, 0.2); color: #B3B3B3; font-size: 14px; padding: 4px 12px; border-radius: 4px; font-weight: bold;">
+                                PROBABILITY: {probability:.0f}%
                             </span>
                         </div>
                     </div>
@@ -227,4 +226,4 @@ if st.button("PREDICT AVAILABILITY 🚀"):
             """, unsafe_allow_html=True)
             
     except Exception as e:
-        st.error(f"เกิดข้อผิดพลาดในการทำนาย: {e}")
+        st.error(f"เกิดข้อผิดพลาด: {e}")
