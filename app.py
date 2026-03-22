@@ -68,7 +68,7 @@ st.markdown("""
 st.sidebar.header("🌸 ตั้งค่าและข้อมูลภาพยนตร์")
 
 selected_model_name = st.sidebar.selectbox(
-    "🤖 1. เลือกโมเดลทำนาย", 
+    " 1. เลือกโมเดลทำนาย", 
     ['Gradient Boosting', 'Random Forest', 'Support Vector Machine (SVM)', 'Logistic Regression']
 )
 
@@ -92,7 +92,7 @@ else:
     selected_bg_url = DEFAULT_BACKGROUND
 
 # ------------------------------------------------
-# 🎨 Custom CSS (บังคับธีมสีชมพูพาสเทล อ่านง่ายสำหรับทุกคน)
+#  Custom CSS (บังคับธีมสีชมพูพาสเทล อ่านง่ายสำหรับทุกคน)
 # ------------------------------------------------
 st.markdown(f"""
     <style>
@@ -166,13 +166,13 @@ st.markdown(f"""
 
 # แถบเลื่อนปรับค่า
 st.sidebar.markdown("---")
-st.sidebar.subheader("📊 3. ปรับแต่งสถิติ")
-year = st.sidebar.slider("📅 ปีที่ฉาย", 1900, 2030, def_year)
+st.sidebar.subheader(" 3. ปรับแต่งสถิติ")
+year = st.sidebar.slider(" ปีที่ฉาย", 1900, 2030, def_year)
 age_options = ['Unknown', 'all', '7+', '13+', '16+', '18+']
 age_index = age_options.index(def_age) if def_age in age_options else 0
-age = st.sidebar.selectbox("👪 เรทอายุ", age_options, index=age_index)
-imdb = st.sidebar.slider("⭐ คะแนน IMDb", 0.0, 10.0, def_imdb, step=0.1)
-rotten_tomatoes = st.sidebar.slider("🍅 คะแนน Rotten Tomatoes", 0.0, 100.0, def_rt, step=1.0)
+age = st.sidebar.selectbox(" เรทอายุ", age_options, index=age_index)
+imdb = st.sidebar.slider(" คะแนน IMDb", 0.0, 10.0, def_imdb, step=0.1)
+rotten_tomatoes = st.sidebar.slider(" คะแนน Rotten Tomatoes", 0.0, 100.0, def_rt, step=1.0)
 
 # ------------------------------------------------
 # 5. ปุ่มทำนายและการแสดงผลลัพธ์
@@ -181,7 +181,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 model = load_model(selected_model_name)
 st.markdown(f"<p class='text-sm tracking-wide text-center' style='color: #ff69b4 !important;'>MODELS IN USE: <span class='font-bold'>{selected_model_name.upper()}</span></p>", unsafe_allow_html=True)
 
-if st.button("PREDICT AVAILABILITY 🚀"):
+if st.button(" PREDICT AVAILABILITY "):
     
     input_data = pd.DataFrame({'Year': [year], 'Age': [age], 'IMDb': [imdb], 'Rotten Tomatoes': [rotten_tomatoes]})
     
@@ -195,7 +195,7 @@ if st.button("PREDICT AVAILABILITY 🚀"):
                 <div class="flex items-center">
                     <div class="text-5xl mr-6">🍿</div>
                     <div>
-                        <h2 class="text-3xl font-extrabold text-green-700 mb-1 tracking-wide">YES! ✨</h2>
+                        <h2 class="text-3xl font-extrabold text-green-700 mb-1 tracking-wide">YES! </h2>
                         <p class="text-green-600 text-lg">ภาพยนตร์เรื่องนี้น่าจะมีฉายบน <span class="font-bold">NETFLIX</span></p>
                         <div class="mt-4">
                             <span class="inline-block bg-green-200 text-green-800 text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider">
@@ -213,7 +213,7 @@ if st.button("PREDICT AVAILABILITY 🚀"):
                 <div class="flex items-center">
                     <div class="text-5xl mr-6">🎬</div>
                     <div>
-                        <h2 class="text-3xl font-extrabold text-red-700 mb-1 tracking-wide">NO 🥺</h2>
+                        <h2 class="text-3xl font-extrabold text-red-700 mb-1 tracking-wide">NO </h2>
                         <p class="text-red-600 text-lg">ภาพยนตร์เรื่องนี้น่าจะ <span class="font-bold">ไม่มี</span> ฉายบน NETFLIX</p>
                         <div class="mt-4">
                             <span class="inline-block bg-red-200 text-red-800 text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider">
