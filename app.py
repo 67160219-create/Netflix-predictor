@@ -101,7 +101,7 @@ st.markdown(f"""
             font-family: 'Inter', sans-serif !important;
         }}
     
-        #MainMenu {{visibility: hidden;}} footer {{visibility: hidden;}}
+        #MainMenu {visibility: hidden;} footer {visibility: hidden;}
         
         /* 🌟 ซ่อนแถบด้านบนสุดให้โปร่งใส กลืนไปกับพื้นหลัง 🌟 */
         [data-testid="stHeader"] {{
