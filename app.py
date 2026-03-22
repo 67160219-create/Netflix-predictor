@@ -6,7 +6,7 @@ import joblib
 # ------------------------------------------------
 # 1. ตั้งค่าหน้าเว็บให้เต็มจอ
 # ------------------------------------------------
-st.set_page_config(page_title="Netflix Predictor", page_icon="🎬, layout="centered")
+st.set_page_config(page_title="Netflix Predictor", page_icon="🎬", layout="centered")
 
 # **ลิสต์รูปภาพพื้นหลัง Demo สำหรับหนังดังๆ**
 DEMO_BACKGROUNDS = {
@@ -73,7 +73,7 @@ selected_model_name = st.sidebar.selectbox(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.subheader(" 2. ข้อมูลภาพยนตร์/ซีรีส์")
+st.sidebar.subheader("🎬 2. ข้อมูลภาพยนตร์/ซีรีส์")
 
 movie_titles = ["-- กรอกข้อมูลเอง (Manual) --"] + df_movies['Title'].dropna().tolist()
 selected_title = st.sidebar.selectbox("🔍 ค้นหาชื่อเรื่อง", movie_titles)
