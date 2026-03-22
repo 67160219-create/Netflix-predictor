@@ -65,7 +65,7 @@ st.markdown("""
 # ------------------------------------------------
 # 4. ส่วนตัวเลือกทางซ้าย (Sidebar)
 # ------------------------------------------------
-st.sidebar.header("⚙️ ตั้งค่าระบบ")
+st.sidebar.header(" ตั้งค่าระบบ")
 
 selected_model_name = st.sidebar.selectbox(
     " 1. เลือกโมเดลทำนาย", 
@@ -73,10 +73,10 @@ selected_model_name = st.sidebar.selectbox(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("🎬 2. ข้อมูลภาพยนตร์/ซีรีส์")
+st.sidebar.subheader(" 2. ข้อมูลภาพยนตร์/ซีรีส์")
 
 movie_titles = ["-- กรอกข้อมูลเอง (Manual) --"] + df_movies['Title'].dropna().tolist()
-selected_title = st.sidebar.selectbox("🔍 ค้นหาชื่อเรื่อง", movie_titles)
+selected_title = st.sidebar.selectbox(" ค้นหาชื่อเรื่อง", movie_titles)
 
 if selected_title != "-- กรอกข้อมูลเอง (Manual) --":
     movie_info = df_movies[df_movies['Title'] == selected_title].iloc[0]
@@ -197,7 +197,7 @@ if st.button("PREDICT"):
                     <div style="font-size: 40px; margin-right: 20px;">🍿</div>
                     <div>
                         <h2 style="font-size: 24px; font-weight: bold; color: #FFFFFF; margin: 0; letter-spacing: 1px;">AVAILABLE ON NETFLIX</h2>
-                        <p style="color: #B3B3B3; font-size: 16px; margin-top: 5px;">ภาพยนตร์เรื่องนี้มีโอกาสสูงที่จะฉายบนแพลตฟอร์ม</p>
+                        <p style="color: #B3B3B3; font-size: 16px; margin-top: 5px;">ภาพยนตร์เรื่องนี้มีโอกาสสูงที่จะฉายบน Netflix</p>
                         <div style="margin-top: 10px;">
                             <span style="background-color: rgba(229, 9, 20, 0.2); color: #E50914; font-size: 14px; padding: 4px 12px; border-radius: 4px; font-weight: bold;">
                                 MATCH: {probability:.0f}%
