@@ -6,7 +6,7 @@ import joblib
 # ------------------------------------------------
 # 1. ตั้งค่าหน้าเว็บให้เต็มจอ
 # ------------------------------------------------
-st.set_page_config(page_title="Netflix Predictor", page_icon="🎬", layout="centered")
+st.set_page_config(page_title="Netflix Predictor", page_icon="", layout="centered")
 
 # **ลิสต์รูปภาพพื้นหลัง Demo สำหรับหนังดังๆ**
 DEMO_BACKGROUNDS = {
@@ -67,15 +67,15 @@ st.markdown("""
 st.sidebar.header("⚙️ ตั้งค่าระบบ")
 
 selected_model_name = st.sidebar.selectbox(
-    "🤖 1. เลือกโมเดลทำนาย", 
+    " 1. เลือกโมเดลทำนาย", 
     ['Gradient Boosting', 'Random Forest', 'Support Vector Machine (SVM)', 'Logistic Regression']
 )
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("🎬 2. ข้อมูลภาพยนตร์/ซีรีส์")
+st.sidebar.subheader(" 2. ข้อมูลภาพยนตร์/ซีรีส์")
 
 movie_titles = ["-- กรอกข้อมูลเอง (Manual) --"] + df_movies['Title'].dropna().tolist()
-selected_title = st.sidebar.selectbox("🔍 ค้นหาชื่อเรื่อง", movie_titles)
+selected_title = st.sidebar.selectbox(" ค้นหาชื่อเรื่อง", movie_titles)
 
 if selected_title != "-- กรอกข้อมูลเอง (Manual) --":
     movie_info = df_movies[df_movies['Title'] == selected_title].iloc[0]
@@ -166,13 +166,13 @@ st.markdown(f"""
 
 # แถบเลื่อนปรับค่า
 st.sidebar.markdown("---")
-st.sidebar.subheader("📊 3. ปรับแต่งสถิติ")
-year = st.sidebar.slider("📅 ปีที่ฉาย", 1900, 2030, def_year)
+st.sidebar.subheader(" 3. ปรับแต่งสถิติ")
+year = st.sidebar.slider(" ปีที่ฉาย", 1900, 2030, def_year)
 age_options = ['Unknown', 'all', '7+', '13+', '16+', '18+']
 age_index = age_options.index(def_age) if def_age in age_options else 0
-age = st.sidebar.selectbox("👪 เรทอายุ", age_options, index=age_index)
-imdb = st.sidebar.slider("⭐ คะแนน IMDb", 0.0, 10.0, def_imdb, step=0.1)
-rotten_tomatoes = st.sidebar.slider("🍅 คะแนน Rotten Tomatoes", 0.0, 100.0, def_rt, step=1.0)
+age = st.sidebar.selectbox(" เรทอายุ", age_options, index=age_index)
+imdb = st.sidebar.slider(" คะแนน IMDb", 0.0, 10.0, def_imdb, step=0.1)
+rotten_tomatoes = st.sidebar.slider(" คะแนน Rotten Tomatoes", 0.0, 100.0, def_rt, step=1.0)
 
 # ------------------------------------------------
 # 5. ปุ่มทำนายและการแสดงผลลัพธ์
