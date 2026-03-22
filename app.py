@@ -6,7 +6,7 @@ import joblib
 # ------------------------------------------------
 # 1. ตั้งค่าหน้าเว็บให้เต็มจอและซ่อนเมนูที่ไม่จำเป็น
 # ------------------------------------------------
-st.set_page_config(page_title="Netflix Predictor", page_icon="", layout="centered")
+st.set_page_config(page_title="Netflix Predictor", page_icon="🍿", layout="centered")
 
 # **ลิสต์รูปภาพพื้นหลัง Demo สำหรับหนังดังๆ**
 DEMO_BACKGROUNDS = {
@@ -46,7 +46,7 @@ def load_data():
 df_movies = load_data()
 
 # ------------------------------------------------
-# 3. ส่วนหัวของเว็บ (Main Area) - ปรับ ENG บน THAI ล่าง จัด Balance
+# 3. ส่วนหัวของเว็บ (Main Area)
 # ------------------------------------------------
 st.markdown("""
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -65,18 +65,18 @@ st.markdown("""
 # ------------------------------------------------
 # 4. ส่วนตัวเลือกทางซ้าย (Sidebar)
 # ------------------------------------------------
-st.sidebar.header(" ตั้งค่าและข้อมูลภาพยนตร์")
+st.sidebar.header("⚙️ ตั้งค่าและข้อมูลภาพยนตร์")
 
 selected_model_name = st.sidebar.selectbox(
-    " 1. เลือกโมเดลทำนาย", 
+    "🤖 1. เลือกโมเดลทำนาย", 
     ['Gradient Boosting', 'Random Forest', 'Support Vector Machine (SVM)', 'Logistic Regression']
 )
 
 st.sidebar.markdown("---")
-st.sidebar.subheader(" 2. ข้อมูลภาพยนตร์/ซีรีส์")
+st.sidebar.subheader("🎬 2. ข้อมูลภาพยนตร์/ซีรีส์")
 
 movie_titles = ["-- กรอกข้อมูลเอง (Manual) --"] + df_movies['Title'].dropna().tolist()
-selected_title = st.sidebar.selectbox(" ค้นหาชื่อเรื่อง", movie_titles)
+selected_title = st.sidebar.selectbox("🔍 ค้นหาชื่อเรื่อง", movie_titles)
 
 if selected_title != "-- กรอกข้อมูลเอง (Manual) --":
     movie_info = df_movies[df_movies['Title'] == selected_title].iloc[0]
@@ -92,36 +92,42 @@ else:
     selected_bg_url = DEFAULT_BACKGROUND
 
 # ------------------------------------------------
-#  Custom CSS (ใส่กล่องดำตรงกลางกลับมาให้ด้วย)
+# 🎨 Custom CSS (ปรับเป็น Theme ดำเข้ม อ่านง่ายขึ้น)
 # ------------------------------------------------
 st.markdown(f"""
     <style>
-        /* บังคับใช้ฟอนต์ Inter ทั้งเว็บให้ดูเป็นโปรแอพ */
+        /* บังคับใช้ฟอนต์ Inter ทั้งเว็บ */
         html, body, [class*="css"] {{
             font-family: 'Inter', sans-serif !important;
         }}
     
         #MainMenu {{visibility: hidden;}} footer {{visibility: hidden;}}
         
-        /* พื้นหลังแบบ Netflix */
+        /* พื้นหลังแบบ Netflix (ทำให้มืดลงอีกนิดเพื่อให้ตัวหนังสือเด่น) */
         .stApp {{
-            background: linear-gradient(to bottom, rgba(20, 20, 20, 0.4) 0%, rgba(20, 20, 20, 0.9) 60%, rgba(20, 20, 20, 1) 100%), url("{selected_bg_url}");
+            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.7) 0%, rgba(10, 10, 10, 0.95) 100%), url("{selected_bg_url}");
             background-size: cover;
             background-position: center top;
             background-attachment: fixed;
             transition: background-image 0.6s ease-in-out;
         }}
 
-        /* สร้างกล่องโปร่งแสงสีดำครอบเนื้อหาตรงกลาง (จัด Balance) */
+        /* บังคับ Sidebar ให้เป็นสีดำ */
+        [data-testid="stSidebar"] {{
+            background-color: rgba(10, 10, 10, 0.95) !important;
+            border-right: 1px solid #333;
+        }}
+
+        /* กล่องเนื้อหาตรงกลาง (ปรับให้ทึบขึ้นเป็น 95% จะได้อ่านง่ายๆ) */
         .block-container {{
-            background-color: rgba(15, 15, 15, 0.85) !important;
-            border-radius: 24px;
-            padding: 3rem 3rem !important; /* จัด padding ให้สมดุล */
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-            max-width: 800px !important; /* คุมความกว้างไม่ให้กล่องยืดเกินไป */
+            background-color: rgba(10, 10, 10, 0.95) !important;
+            border-radius: 16px;
+            padding: 3rem !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+            border: 1px solid #333;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            max-width: 800px !important;
         }}
 
         /* แต่งปุ่มกด Netflix Button */
@@ -137,7 +143,7 @@ st.markdown(f"""
             border: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
-            margin-top: 10px;
+            margin-top: 15px;
         }}
         
         div.stButton > button:first-child:hover {{
@@ -146,25 +152,25 @@ st.markdown(f"""
             box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
         }}
         
-        /* เปลี่ยนสีตัวหนังสือในเว็บให้เป็นสีขาว-เทาอ่อน เพื่อให้อ่านง่ายบนพื้นดำ */
-        .css-10trblm, .css-1p05e8v, p, span, label {{
-            color: #e5e5e5 !important;
+        /* บังคับสีตัวหนังสือให้สว่างทับ Theme ของเครื่อง */
+        h1, h2, h3, p, span, label, .st-emotion-cache-10trblm {{
+            color: #F5F5F1 !important;
         }}
     </style>
 """, unsafe_allow_html=True)
 
 # แถบเลื่อนปรับค่า
 st.sidebar.markdown("---")
-st.sidebar.subheader(" 3. ปรับแต่งสถิติ")
-year = st.sidebar.slider(" ปีที่ฉาย", 1900, 2030, def_year)
+st.sidebar.subheader("📊 3. ปรับแต่งสถิติ")
+year = st.sidebar.slider("📅 ปีที่ฉาย", 1900, 2030, def_year)
 age_options = ['Unknown', 'all', '7+', '13+', '16+', '18+']
 age_index = age_options.index(def_age) if def_age in age_options else 0
-age = st.sidebar.selectbox(" เรทอายุ", age_options, index=age_index)
-imdb = st.sidebar.slider(" คะแนน IMDb", 0.0, 10.0, def_imdb, step=0.1)
-rotten_tomatoes = st.sidebar.slider(" คะแนน Rotten Tomatoes", 0.0, 100.0, def_rt, step=1.0)
+age = st.sidebar.selectbox("👪 เรทอายุ", age_options, index=age_index)
+imdb = st.sidebar.slider("⭐ คะแนน IMDb", 0.0, 10.0, def_imdb, step=0.1)
+rotten_tomatoes = st.sidebar.slider("🍅 คะแนน Rotten Tomatoes", 0.0, 100.0, def_rt, step=1.0)
 
 # ------------------------------------------------
-# 5. ปุ่มทำนายและการแสดงผลลัพธ์ (แบบมีเปอร์เซ็นต์ + Tailwind UI)
+# 5. ปุ่มทำนายและการแสดงผลลัพธ์
 # ------------------------------------------------
 st.markdown("<br>", unsafe_allow_html=True)
 model = load_model(selected_model_name)
@@ -180,14 +186,14 @@ if st.button("PREDICT AVAILABILITY"):
         
         if prediction[0] == 1:
             st.markdown(f"""
-            <div class="bg-gray-900 bg-opacity-80 border-l-4 border-green-500 rounded-lg shadow-2xl p-6 mt-4 backdrop-filter backdrop-blur-sm transform transition duration-500 hover:scale-105">
+            <div class="bg-gray-900 border-l-4 border-green-500 rounded-lg p-6 mt-4 shadow-xl">
                 <div class="flex items-center">
-                    <div class="text-5xl mr-6"></div>
+                    <div class="text-5xl mr-6">🍿</div>
                     <div>
                         <h2 class="text-3xl font-extrabold text-white mb-1 tracking-wide">YES</h2>
                         <p class="text-gray-300 text-lg">ภาพยนตร์เรื่องนี้น่าจะมีฉายบน <span class="text-red-500 font-bold">NETFLIX</span></p>
                         <div class="mt-4">
-                            <span class="inline-block bg-green-600 bg-opacity-20 text-green-400 text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-green-500 border-opacity-30">
+                            <span class="inline-block bg-green-900 text-green-300 text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-green-500">
                                 ความน่าจะเป็น: {probability:.1f}%
                             </span>
                         </div>
@@ -198,14 +204,14 @@ if st.button("PREDICT AVAILABILITY"):
             st.balloons()
         else:
             st.markdown(f"""
-            <div class="bg-gray-900 bg-opacity-80 border-l-4 border-red-600 rounded-lg shadow-2xl p-6 mt-4 backdrop-filter backdrop-blur-sm transform transition duration-500 hover:scale-105">
+            <div class="bg-gray-900 border-l-4 border-red-600 rounded-lg p-6 mt-4 shadow-xl">
                 <div class="flex items-center">
-                    <div class="text-5xl mr-6"></div>
+                    <div class="text-5xl mr-6">🎬</div>
                     <div>
                         <h2 class="text-3xl font-extrabold text-white mb-1 tracking-wide">NO</h2>
                         <p class="text-gray-300 text-lg">ภาพยนตร์เรื่องนี้น่าจะ <span class="text-red-500 font-bold">ไม่มี</span> ฉายบน NETFLIX</p>
                         <div class="mt-4">
-                            <span class="inline-block bg-red-600 bg-opacity-20 text-red-400 text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-red-500 border-opacity-30">
+                            <span class="inline-block bg-red-900 text-red-300 text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-red-500">
                                 ความน่าจะเป็น (ที่จะมีฉาย): {probability:.1f}%
                             </span>
                         </div>
